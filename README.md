@@ -1,1 +1,1 @@
-# PracticumSemi
+# Practicum
