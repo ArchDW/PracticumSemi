@@ -556,4 +556,49 @@ function join_diagnostico_table()
   $sql .= " ORDER BY d.id ASC";
   return find_by_sql($sql);
 }
+function join_Act_table_alumnos($matricula)
+{
+  global $db;
+  $sql  = " SELECT s.actividad AS actividad, s.fecha AS fecha, a.matricula AS matricula, a.nombre AS nombre, s.id AS id, s.estado As estado";
+  $sql  .= " FROM actividad s, alumnos a";
+  $sql  .=" WHERE s.matricula = a.matricula AND s.matricula = $matricula AND s.estado = 0";
+  $sql .= " ORDER BY s.id ASC";
+  return find_by_sql($sql);
+}
+function join_sesiones_table_alumnos($matricula)
+{
+  global $db;
+  $sql  = " SELECT s.nombre AS id,s.proposito AS proposito,s.matricula AS matricula, a.nombre AS nombre, s.id AS IDE, s.acuerdos AS acuerdos";
+  $sql  .=" FROM sesiones s, alumnos a";
+  $sql  .=" WHERE s.matricula = a.matricula AND s.matricula = $matricula";
+  $sql  .= " ORDER BY s.id ASC";
+  return find_by_sql($sql);
+}
+function join_diagnostico_table_alumnos($matricula)
+{
+  global $db;
+  $sql  = " SELECT d.estado AS estado, a.nombre AS nombre, d.id AS id, d.fortaleza AS fortaleza, d.debilidad AS debilidad, d.aspecto AS aspecto, d.estrategia AS estrategia, d.matricula AS matricula";
+  $sql  .= " FROM diagnosticos d, alumnos a";
+  $sql  .=" WHERE d.matricula = a.matricula AND d.matricula = $matricula";
+  $sql .= " ORDER BY d.id ASC";
+  return find_by_sql($sql);
+}
+function join_induccion_table_alumnos($matricula)
+{
+  global $db;
+  $sql  = " SELECT id";
+  $sql  .= " FROM inducion";
+  $sql  .=" WHERE matricula = $matricula";
+  $sql  .= " ORDER BY id ASC";
+  return find_by_sql($sql);
+}
+function join_acciones_table_alumnos($protocolo)
+{
+  global $db;
+  $sql  = " SELECT id, accion, evaluacion, fecha";
+  $sql  .= " FROM acciones";
+  $sql  .=" WHERE protocolo = $protocolo";
+  $sql  .= " ORDER BY id ASC";
+  return find_by_sql($sql);
+}
 ?>
